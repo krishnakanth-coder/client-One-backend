@@ -13,7 +13,13 @@ dotenv.config();
 // config db
 connectDB();
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+//app.use(cors({ origin: 'http://localhost:3000' }));
+const corsOptions = {
+  origin: 'https://myview-dd7u.onrender.com', // or ['https://myview-dd7u.onrender.com', 'http://localhost:3000'] for multiple origins
+  credentials: true, // If you need to send cookies or credentials
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
