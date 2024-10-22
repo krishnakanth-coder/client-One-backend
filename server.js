@@ -13,18 +13,22 @@ dotenv.config();
 // config db
 connectDB();
 
-//app.use(cors({ origin: 'http://localhost:3000' }));
+// CORS options
 const corsOptions = {
-  origin: 'https://myview-dd7u.onrender.com', // or ['https://myview-dd7u.onrender.com', 'http://localhost:3000'] for multiple origins
-  credentials: true, // If you need to send cookies or credentials
+  origin: ['https://myview-dd7u.onrender.com', 'http://localhost:3000'], // Support multiple origins
+  credentials: true, // Allow cookies or credentials
 };
 
 app.use(cors(corsOptions));
 
+// Middleware
 app.use(express.json());
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/youtube', youtubeRoutes);
 
-const PORT = process.env.PORT;
+// Port with fallback
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server is running at PORT ${PORT}`));
